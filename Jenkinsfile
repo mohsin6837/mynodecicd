@@ -25,7 +25,7 @@ pipeline {
         stage('Push Docker Image to Docker Hub') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_HUB_CREDENTIALS) {
+                    docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-creds') {
                         def app = docker.build("mohsin955/node-app")
                         app.push('latest')
                     }
