@@ -4,6 +4,12 @@ pipeline {
         DOCKER_HUB_CREDENTIALS = credentials('docker-hub-creds')
     }
     stages {
+        
+        stage('Test Docker Login') {
+            steps {
+                sh 'echo "$DOCKER_HUB_CREDENTIALS_PSW" | docker login -u "$DOCKER_HUB_CREDENTIALS_USR" --password-stdin'
+            }
+        }
         stage('Checkout Code') {
             steps {
                 git branch: 'main', url: 'https://github.com/mohsin6837/mynodecicd.git'
